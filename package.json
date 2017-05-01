@@ -1,0 +1,10 @@
+{
+  "name": "apw",
+  "version": "0.1.0",
+  "main": "main.js",
+  "author": "Xinkai Chen <xinkai.chen@qq.com>",
+  "license": "GPL",
+  "dependencies": {
+    "write-json-file": "^2.0.0"
+  }
+}
