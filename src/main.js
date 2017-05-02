@@ -103,7 +103,7 @@ const main = () => {
 
     const recentRemovedSet = setMinus(knownPackageIds, packageIds);
     recentRemovedSet.forEach(id => {
-        db.recentRemovedPackages[id] = knownPackageIds[id];
+        db.recentRemovedPackages[id] = db.knownPackages[id];
         db.recentRemovedPackages[id].removeTime = timestamp;
     });
     for (let id in db.recentRemovedPackages) {
