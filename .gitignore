@@ -1,4 +1,2 @@
-/run/*.json
-/run/local
-/run/sync
+/run
 /node_modules

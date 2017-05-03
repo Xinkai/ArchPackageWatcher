@@ -1,0 +1,6 @@
+[Unit]
+Description=Arch Package Watcher (Hourly)
+
+[Timer]
+OnCalendar=hourly
+Persistent=true

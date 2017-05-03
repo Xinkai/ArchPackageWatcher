@@ -5,6 +5,7 @@
   "author": "Xinkai Chen <xinkai.chen@qq.com>",
   "license": "GPL",
   "dependencies": {
+    "chalk": "^1.1.3",
     "write-json-file": "^2.0.0"
   }
 }

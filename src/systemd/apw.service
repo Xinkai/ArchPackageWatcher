@@ -1,0 +1,6 @@
+[Unit]
+Description=Arch Package Watcher Update
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/apw update
