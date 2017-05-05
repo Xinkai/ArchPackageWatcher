@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ArchLinux Recent Repo Changes</title>
+    <style>
+        a,
+        a:visited {
+            color: #07b;
+            text-decoration: none;
+        }
+        html,
+        body {
+            padding: 0 10px;
+            margin: 0;
+            background-color: #ecf2f5;
+        }
+        header {
+            height: 40px!important;
+            padding: 10px 15px!important;
+            background: #333!important;
+            border-bottom: 5px #08c solid!important;
+        }
+        h1 {
+            float: left;
+            color: whitesmoke;
+            font-family: Arial;
+            margin: 0;
+        }
+        #Banner {
+            float: right;
+        }
+        #Banner > * {
+            float: left!important;
+            font-size: 14px!important;
+            font-family: sans-serif!important;
+            line-height: 45px!important;
+            padding-right: 15px!important;
+            padding-left: 15px!important;
+        }
+        #Banner a {
+            color: #999;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        #Banner a:hover {
+            text-decoration: underline;
+            color: white;
+        }
+        table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 26px;
+            border: 2px #bcd solid;
+        }
+        tr.removed,
+        tr.removed a {
+            text-decoration: line-through;
+            color: darkred !important;
+        }
+        td {
+            padding: 15px 5px;
+        }
+        tr:nth-child(odd) {
+            background-color: white;
+        }
+        th,
+        tr:nth-child(even) {
+            background-color: #e4eeff;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="float: left">Arch Linux Package Watcher</h1>
+        <div id="Banner">
+            <a href="https://tokyo.cuoan.net/apw/output.json" target="_blank">Updated <span id="Updated"></span></a>
+            <a href="https://aur.archlinux.org/packages/apw-git">Install command-line tool from AUR</a>
+            <a href="https://www.github.com/Xinkai/ArchPackageWatcher">Github</a>
+        </div>
+    </header>
+
+    <table>
+        <thead>
+            <th>Arch</th>
+            <th>Repo</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Url</th>
+            <th>Time</th>
+        </thead>
+        <tbody id="TBody">
+        </tbody>
+    </table>
+<script>
+"use strict";
+function changedTime(pkg) {
+    console.log(pkg);
+    return pkg.createTime ? pkg.createTime : pkg.removeTime;
+}
+
+fetch("https://tokyo.cuoan.net/apw/output.json")
+    .then(res => res.json())
+    .then(result => {
+        const combined = [
+            ...result.recentAddedPackages,
+            ...result.recentRemovedPackages,
+        ];
+        const sorted = combined.sort((pkg1, pkg2) => changedTime(pkg2) - changedTime(pkg1));
+        const rows = [];
+        for (let pkg of sorted) {
+            rows.push(
+                `<tr class="${pkg.removeTime ? 'removed' : 'added'}">
+    <td>${pkg.arch}</td>
+    <td>${pkg.repo}</td>
+    <td>${pkg.name}</td>
+    <td>${pkg.desc}</td>
+    <td><a href="${pkg.url}" target="_blank">${pkg.url}</a></td>
+    <td>${new Date(changedTime(pkg) * 1000).toLocaleDateString()}</td>
+</tr>`);
+        }
+        document.getElementById("TBody").innerHTML = rows.join("");
+        const updateTime = () => document.getElementById("Updated").innerText = `${((parseInt(Date.now() / 1000) - result.timestamp) / 60 + 0.5) | 0} mins ago`;
+        updateTime();
+        setInterval(() => {
+            updateTime();
+        }, 1000);
+    });
+</script>
+</body>
+</html>

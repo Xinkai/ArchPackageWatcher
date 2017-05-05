@@ -215,7 +215,7 @@ Options:
                         Use alternative pacman.conf
                         
 Note:
-    apw is not retroactive. For a list of recent changes before you installed apw, go to https://tokyo.cuoan.net/apw/output.json`);
+    apw is not retroactive. For a list of recent changes before you installed apw, go to https://tokyo.cuoan.net/apw`);
 };
 
 
