@@ -243,6 +243,7 @@ const output = result => {
     }
 
     if (buffer.length) {
+        console.log(`Detected the following repo changes. Use ${chalk.underline("apw dismiss")} to dismiss them.`);
         console.log(buffer.join("\n"));
     }
 };
