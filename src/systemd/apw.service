@@ -1,6 +1,10 @@
 [Unit]
 Description=Arch Package Watcher Update
+Wants=apw.timer
 
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/apw update
+
+[Install]
+WantedBy=default.target

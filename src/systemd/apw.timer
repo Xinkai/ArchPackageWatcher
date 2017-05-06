@@ -1,5 +1,6 @@
 [Unit]
 Description=Arch Package Watcher (Hourly)
+PartOf=apw.service
 
 [Timer]
 OnCalendar=hourly

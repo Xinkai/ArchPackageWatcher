@@ -260,8 +260,8 @@ const tryUnlink = filePath => {
 };
 
 const cmdClean = () => {
-    console.log(chalk.bold("Stop systemd user timer"));
-    spawn("systemctl", ["--user", "stop", "apw.timer"],
+    console.log(chalk.bold("Disable systemd user timer"));
+    spawn("systemctl", ["--user", "disable", "apw.timer"],
         { encoding: "utf-8", stdio: [0, 1, 2] });
 
     console.log(chalk.bold("Remove ~/.cache/apw.json"));
@@ -279,8 +279,8 @@ const cmdInit = async () => {
     console.log(chalk.bold("Call 'apw dismiss' for the first time"));
     await cmdDismiss(db);
 
-    console.log(chalk.bold("Start systemd user timer"));
-    spawn("systemctl", ["--user", "start", "apw.timer"],
+    console.log(chalk.bold("Enable systemd user timer"));
+    spawn("systemctl", ["--user", "enable", "apw.timer"],
         { encoding: "utf-8", stdio: [0, 1, 2] });
 };
 
