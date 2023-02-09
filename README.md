@@ -16,4 +16,4 @@ Recommended Setup
   ```
   4. When you see the changes, run `apw dismiss` to dismiss them.
 
-Online Version: https://tokyo.cuoan.net/apw
+Online Version: https://apw.cuoan.net/

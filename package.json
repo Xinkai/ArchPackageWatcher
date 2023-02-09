@@ -1,11 +1,14 @@
 {
-  "name": "apw",
-  "version": "0.1.0",
-  "main": "main.js",
-  "author": "Xinkai Chen <xinkai.chen@qq.com>",
-  "license": "GPL",
-  "dependencies": {
-    "chalk": "^1.1.3",
-    "write-json-file": "^2.0.0"
-  }
+    "name": "apw",
+    "version": "0.1.0",
+    "main": "main.mjs",
+    "author": "Xinkai Chen <xinkai.chen@qq.com>",
+    "license": "GPL",
+    "dependencies": {
+        "chalk": "5.2.0",
+        "write-json-file": "5.0.0"
+    },
+    "scripts": {
+        "init": "src/main.mjs init"
+    }
 }

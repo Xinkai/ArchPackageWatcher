@@ -76,7 +76,7 @@
     <header>
         <h1 style="float: left">Arch Linux Package Watcher</h1>
         <div id="Banner">
-            <a href="https://tokyo.cuoan.net/apw/output.json" target="_blank">Updated <span id="Updated"></span></a>
+            <a href="/output.json" target="_blank">Updated <span id="Updated"></span></a>
             <a href="https://aur.archlinux.org/packages/apw-git">Install command-line tool from AUR</a>
             <a href="https://www.github.com/Xinkai/ArchPackageWatcher">Github</a>
         </div>
@@ -100,7 +100,7 @@ function changedTime(pkg) {
     return pkg.createTime ? pkg.createTime : pkg.removeTime;
 }
 
-fetch("https://tokyo.cuoan.net/apw/output.json")
+fetch("/output.json")
     .then(res => res.json())
     .then(result => {
         const combined = [

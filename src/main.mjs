@@ -1,11 +1,11 @@
 #!/usr/bin/node
 "use strict";
 
-const fs = require("fs");
-const os = require("os");
-const spawn = require("child_process").spawnSync;
-const writeJsonFile = require('write-json-file');
-const chalk = require("chalk");
+import fs from "fs";
+import os from "os";
+import {spawnSync} from "child_process";
+import {writeJsonFile} from "write-json-file";
+import chalk from "chalk";
 
 
 const readJson = filePath => {
@@ -117,7 +117,7 @@ const timeBefore = (t1, t2) => {
 
 
 const processChanges = (db, pacmanConfPath) => {
-    const result = spawn(
+    const result = spawnSync(
         "/usr/bin/expac",
         ["--config", pacmanConfPath,
          "--timefmt", "%s",
@@ -193,13 +193,13 @@ const getResultPath = () => `${os.homedir()}/.cache/apw-result.json`;
 
 
 const help = () => {
-    console.log(`Usage: apw [options] [command] 
+    console.log(`Usage: apw [options] [command]
 
 Track Arch Linux repo changes: what packages recently entered/left repos
 
 Commands:
     init                Initialize apw
-    
+
     clean               Clean user data
 
     dismiss             Dismiss current changes
@@ -213,9 +213,9 @@ Commands:
 Options:
     --config FILE       [default=/etc/pacman.conf]
                         Use alternative pacman.conf
-                        
+
 Note:
-    apw is not retroactive. For a list of recent changes before you installed apw, go to https://tokyo.cuoan.net/apw`);
+    apw is not retroactive. For a list of recent changes before you installed apw, go to https://apw.cuoan.net`);
 };
 
 
@@ -261,9 +261,9 @@ const tryUnlink = filePath => {
 
 const cmdClean = () => {
     console.log(chalk.bold("Stop and disable systemd user timer"));
-    spawn("systemctl", ["--user", "stop", "apw.timer"],
+    spawnSync("systemctl", ["--user", "stop", "apw.timer"],
         { encoding: "utf-8", stdio: [0, 1, 2] });
-    spawn("systemctl", ["--user", "disable", "apw.service"],
+    spawnSync("systemctl", ["--user", "disable", "apw.service"],
         { encoding: "utf-8", stdio: [0, 1, 2] });
 
     console.log(chalk.bold("Remove ~/.cache/apw.json"));
@@ -282,9 +282,9 @@ const cmdInit = async () => {
     await cmdDismiss(db);
 
     console.log(chalk.bold("Start and enable systemd user timer"));
-    spawn("systemctl", ["--user", "enable", "apw.service"],
+    spawnSync("systemctl", ["--user", "enable", "apw.service"],
         { encoding: "utf-8", stdio: [0, 1, 2] });
-    spawn("systemctl", ["--user", "start", "apw.timer"],
+    spawnSync("systemctl", ["--user", "start", "apw.timer"],
         { encoding: "utf-8", stdio: [0, 1, 2] });
 };
 
